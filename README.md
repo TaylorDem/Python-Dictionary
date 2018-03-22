@@ -6,8 +6,9 @@ right now I can save words to a list that pops up on the right side with a scrol
 
 next steps:
 save words for good (most likely in just a .txt file to start).
-delete words.
+delete words for good obvi
 actually have definitions pop up/saved.
+create menu with commands like sort or change color
 
 
 long term:
