@@ -37,6 +37,7 @@ savedText.pack(side = tkinter.RIGHT, fill = tkinter.BOTH)
 
 #defined is the text box that hold definition
 definitionBox = tkinter.Text(rightFrame)
+definitionBox.config(wrap=tkinter.WORD)
 definitionBox.insert(tkinter.INSERT, 'Definition here.')
 definitionBox.pack(side = tkinter.RIGHT)
 
