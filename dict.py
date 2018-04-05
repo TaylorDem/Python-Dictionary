@@ -40,12 +40,20 @@ definitionBox = tkinter.Text(rightFrame)
 definitionBox.insert(tkinter.INSERT, 'Definition here.')
 definitionBox.pack(side = tkinter.RIGHT)
 
+#opens .txt file to save more permanently
+text_file = open("Current_Dict.txt", "a")
+
 #this function is the save button command
 def saveWord():
-    #if messagebox.askokcancel("Confirm", "You sure this is a word?"): #I don't think I like this.
+    #if messagebox.askokcancel("Confirm", "You sure this is a word?"): #I don't think I like this. at all.
         savedText.insert(savedText.size(), wordEntry.get())
         savedText.pack(side = tkinter.RIGHT, fill = tkinter.BOTH)
-        wordEntry.delete(0, tkinter.END)
+        
+        #
+        #Now this bit will save word to a .txt file
+        text_file.write("%s\n" % (wordEntry.get()))
+
+        wordEntry.delete(0, tkinter.END) #clear it for next word
 
 #this line makes the scrollbar actually work, the rest is build up/initializing   
 scrollbar.config(command = savedText.yview)
