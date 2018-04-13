@@ -12,6 +12,9 @@ from tkinter import messagebox
 import requests
 import bs4  #beautifulsoup4
 
+#this import to make randomness where needed
+import random
+
 #top is the window that pops up.
 top = tkinter.Tk()
 top.title("Taylor Dictionary")
@@ -60,22 +63,21 @@ def sortAZ():
         savedText.insert(tkinter.END, item)
 
 #this function is the save button command
-def saveWord():
-    #if messagebox.askokcancel("Confirm", "You sure this is a word?"): #I don't think I like this. at all.
+def saveWord(wordToSave):
     #i wanna check to see if the word is already there.
     dupe = False
     for x in range(0, savedText.size()):
-        if savedText.get(x) == wordEntry.get():
+        if savedText.get(x) == wordToSave:
             dupe = True
 
     if dupe == False: #if not already there save
-        savedText.insert(savedText.size(), wordEntry.get())
+        savedText.insert(savedText.size(), wordToSave)
         sortAZ()
         savedText.pack(side = tkinter.RIGHT, fill = tkinter.BOTH)
         
         #opens .txt file to save
         text_file = open("Current_Dict.txt", "w") #a lets you append instead
-        #text_file.write("%s\n" % (wordEntry.get())
+
         #Now this bit will save word list to a .txt file
         for x in range(0, savedText.size()):
             text_file.write("%s\n" % (savedText.get(x)))
@@ -99,14 +101,14 @@ wordLabel.pack( anchor = tkinter.W)
 wordEntry = tkinter.Entry(leftFrame, bd =5)
 wordEntry.pack(anchor = tkinter.W)
 
-#definition entry and label
-defineLabel = tkinter.Label(leftFrame, text="Definition:", fg='cyan', bg='black')
-defineLabel.pack(anchor = tkinter.W)
-defineEntry = tkinter.Entry(leftFrame, bd =5)
-defineEntry.pack(anchor = tkinter.W)
+#definition entry and label, not in use right now
+#defineLabel = tkinter.Label(leftFrame, text="Definition:", fg='cyan', bg='black')
+#defineLabel.pack(anchor = tkinter.W)
+#defineEntry = tkinter.Entry(leftFrame, bd =5)
+#defineEntry.pack(anchor = tkinter.W)
 
 #create button to save
-saveButton = tkinter.Button(leftFrame, text="Save", command=saveWord)
+saveButton = tkinter.Button(leftFrame, text="Save", command= lambda: saveWord(wordEntry.get()))
 saveButton.pack(anchor = tkinter.W)
 #must put the location after you pack it.
 #saveButton.place(x=10, y=100)
@@ -136,9 +138,10 @@ def deleteWord():
 deleteButton = tkinter.Button(leftFrame, text="Delete", command=deleteWord)
 deleteButton.pack(anchor = tkinter.W)
 
+
 #search function
-def searchOnline():
-    dictionaryurl = 'http://www.dictionary.com/browse/' + savedText.get(savedText.curselection()) + '?s=t'
+def searchOnline(word):
+    dictionaryurl = 'http://www.dictionary.com/browse/' + word + '?s=t'
     searchWord = requests.get(dictionaryurl)
     #this line clears old text
     definitionBox.delete(1.0, tkinter.END) #it was a hassle here. 1.0 is very important!
@@ -152,7 +155,20 @@ def searchOnline():
     definitionBox.pack(side = tkinter.BOTTOM)
 
 #search button :)
-searchButton = tkinter.Button(leftFrame, text="Online Def", command=searchOnline)
+searchButton = tkinter.Button( leftFrame, text="Online Def", command= lambda: searchOnline(savedText.get(savedText.curselection())))
 searchButton.pack(anchor = tkinter.W)
+
+#This code below will set up the word list for the random button
+randWord_site = "http://svnweb.freebsd.org/csrg/share/dict/words?view=co&content-type=text/plain"
+
+randResponse = requests.get(randWord_site)
+WORDS = randResponse.content.splitlines()
+random.seed()
+#print(str(WORDS[123])[2:-1]) #TEST LINE, prints b'academia'
+
+#the random button itself.
+randButton = tkinter.Button(leftFrame, text="Random", command= lambda: searchOnline(str(WORDS[random.randint(0, 25499)])[2:-1]))
+randButton.pack(anchor = tkinter.W)
+
 
 top.mainloop()
