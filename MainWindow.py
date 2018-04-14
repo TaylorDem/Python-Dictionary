@@ -18,7 +18,7 @@ class MainWindow():
 
     def dropDownInit(self):
         self.selectedTheme = tkinter.StringVar()
-        self.selectedTheme.set(self.themeNames[0])
+        self.selectedTheme.set(self.themeNames[3]) #this one sets default theme
 
     def __init__(self):
         self.themeNames = ["White", "Leprechaun Piss", "Cyan", "Magenta"]
@@ -78,9 +78,7 @@ class MainWindow():
 
         #Menu
         self.dropDownInit()
-        Menu = tkinter.OptionMenu(leftFrame, self.selectedTheme, *self.themeNames,\
-                                     command=self.action.ChangeColor(self.selectedTheme.get(),\
-                                                                    top, leftFrame, rightFrame, self.savedText, self.definitionBox))
+        Menu = tkinter.OptionMenu(leftFrame, self.selectedTheme, *self.themeNames, command=self.action.ChangeColor(self.selectedTheme.get(), top, leftFrame, rightFrame, wordLabel, self.savedText, self.definitionBox))
 
         #packing section
         leftFrame.pack(side = tkinter.LEFT)
