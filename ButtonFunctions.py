@@ -81,3 +81,24 @@ class ButtonFunctions():
             #now delete the visual one
             savedText.delete(savedText.curselection())
             savedText.pack(side = tkinter.RIGHT, fill = tkinter.BOTH)
+
+    #this is the Menu button function that is ran 
+    def ChangeColor(self, chosenTheme, top, leftFrame, rightFrame, listBox, definitionBox):
+        #self.top.config(fg='cyan') #there is no foreground on frames or the root?
+        if chosenTheme == 'Cyan':
+            top.configure(bg='black')
+            leftFrame.configure(bg='black')
+            rightFrame.configure(bg='black')
+            listBox.configure(bg='black')
+            listBox.configure(fg='cyan')
+            definitionBox.configure(bg='black')
+            definitionBox.configure(fg='cyan')
+        elif chosenTheme == 'White':
+            top.configure(bg='black')
+            leftFrame.configure(bg='black')
+            rightFrame.configure(bg='black')
+            listBox.configure(bg='black')
+            listBox.configure(fg='white')
+            definitionBox.configure(bg='black')
+            definitionBox.configure(fg='white')
+    
