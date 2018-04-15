@@ -16,16 +16,16 @@ class MainWindow():
         self.action.saveWord(self.wordEntry.get(), self.savedText, self.definitionBox)
         self.wordEntry.delete(0, tkinter.END)
 
-    def dropDownInit(self):
-        self.selectedTheme = tkinter.StringVar()
-        self.selectedTheme.set(self.themeNames[3]) #this one sets default theme
+    #def dropDownInit(self):
+    #    self.selectedTheme = tkinter.StringVar()
+    #    self.selectedTheme.set(self.themeNames[3]) #this one sets default theme
 
     def __init__(self):
-        self.themeNames = ["White", "Leprechaun Piss", "Cyan", "Magenta"]
+        #self.themeNames = ["White", "Leprechaun Piss", "Cyan", "Magenta"]
         self.action = BF.ButtonFunctions()
         top = tkinter.Tk()
         top.title("Taylor Dictionary")
-        top.geometry('500x300') #size of wi
+        top.geometry('500x300') # Size WxH
 
         #need frames to make it pretty and organized
         leftFrame = tkinter.Frame(top)
@@ -77,8 +77,17 @@ class MainWindow():
         randButtonSave = tkinter.Button(leftFrame, text="Save Random", command= lambda: self.action.saveWord(str(WORDS[random.randint(0, 25499)])[2:-1], self.savedText, self.definitionBox))
 
         #Menu
-        self.dropDownInit()
-        Menu = tkinter.OptionMenu(leftFrame, self.selectedTheme, *self.themeNames, command=self.action.ChangeColor(self.selectedTheme.get(), top, leftFrame, rightFrame, wordLabel, self.savedText, self.definitionBox))
+        #self.dropDownInit()
+        #Menu = tkinter.OptionMenu(leftFrame, self.selectedTheme, *self.themeNames, command= lambda : self.action.ChangeColor(self.selectedTheme.get(), top, leftFrame, rightFrame, wordLabel, self.savedText, self.definitionBox))
+
+        #Other Menu?
+        menuBar = tkinter.Menu(top)
+        themesMenu = tkinter.Menu(menuBar, tearoff=0)
+        themesMenu.add_command(label="White", command= lambda : self.action.ChangeColor("White", top, leftFrame, rightFrame, wordLabel, self.savedText, self.definitionBox))
+        themesMenu.add_command(label="Leprechaun Piss", command= lambda : self.action.ChangeColor("Leprechaun Piss", top, leftFrame, rightFrame, wordLabel, self.savedText, self.definitionBox))
+        themesMenu.add_command(label="Cyan", command= lambda : self.action.ChangeColor("Cyan", top, leftFrame, rightFrame, wordLabel, self.savedText, self.definitionBox))
+        themesMenu.add_command(label="Magenta", command= lambda : self.action.ChangeColor("Magenta", top, leftFrame, rightFrame, wordLabel, self.savedText, self.definitionBox))
+        menuBar.add_cascade(label="Themes", menu=themesMenu)
 
         #packing section
         leftFrame.pack(side = tkinter.LEFT)
@@ -86,7 +95,7 @@ class MainWindow():
         scrollbar.pack(side = tkinter.RIGHT, fill = tkinter.Y) 
         self.savedText.pack(side = tkinter.RIGHT, fill = tkinter.BOTH)
         self.definitionBox.pack(side = tkinter.RIGHT)
-        Menu.pack(side = tkinter.TOP)
+        #Menu.pack(side = tkinter.TOP)
         wordLabel.pack( anchor = tkinter.W)
         self.wordEntry.pack(anchor = tkinter.W)
         saveButton.pack(anchor = tkinter.W)
@@ -95,7 +104,9 @@ class MainWindow():
         randButton.pack(anchor = tkinter.W)
         randButtonSave.pack(anchor = tkinter.W)
 
+        top.config(menu=menuBar)
         top.mainloop()
+
 
 #this is the line that runs it if you wanted to delete the dict.py file
 #MainWindow()

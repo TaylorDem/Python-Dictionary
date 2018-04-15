@@ -45,7 +45,7 @@ class ButtonFunctions():
         definition = parsedText.find('meta', attrs={'name':'description'})
         definitionBox.insert(tkinter.INSERT, definition["content"][:-10])   #this pulls content out of it.args
         #each content on the site ends with " see more." so with   ^^^^ I delete the last 10 characters
-        definitionBox.config(fg='black')
+        #definitionBox.config(fg='black')
         definitionBox.pack(side = tkinter.BOTTOM)
     
    
@@ -108,11 +108,11 @@ class ButtonFunctions():
             top.configure(bg='black')
             leftFrame.configure(bg='black')
             rightFrame.configure(bg='black')
-            wordLabel.configure(bg='black', fg='green')
+            wordLabel.configure(bg='black', fg='light green')
             listBox.configure(bg='black')
-            listBox.configure(fg='green')
+            listBox.configure(fg='light green')
             definitionBox.configure(bg='black')
-            definitionBox.configure(fg='green')
+            definitionBox.configure(fg='light green')
         elif chosenTheme == 'Magenta':
             top.configure(bg='black')
             leftFrame.configure(bg='black')
