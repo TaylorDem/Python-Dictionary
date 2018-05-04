@@ -10,8 +10,12 @@ current_dict.txt holds all the saved words.
 next steps:
 have option to create custom definitions and save them.
 create menu with commands like sort type or change color themes.
-have option to pull definition from urban dictionary instead/as well.
+have option to pull definition from urban dictionary instead/as well.\
+
+
+make save random pull until ' ' character in textbox to save the random word displayed.
 
 
 other quality of life goals:
 be able to multi-delete words in list.
+have error message change back to theme on next search.
